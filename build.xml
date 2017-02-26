@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<project name="Downloader" default="run" >
+
+    <target name="make.dirs" description="Make a dir">
+        <mkdir dir="build"/>
+        <mkdir dir="build/classes"/>
+    </target>
+
+    <target name="compile" description="compile code"  depends="make.dirs">
+        <javac destdir="build/classes">
+            <src path="src"/>
+        </javac>
+    </target>
+
+    <target name="jar" description="mkjar" depends="compile">
+        <jar destfile="build/Downloader.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" description="Do the build and run"  depends="jar">
+        <java jar="build/Downloader.jar" fork="true"/>
+    </target>
+
+</project>
